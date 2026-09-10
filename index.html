@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Landslide Risk Monitoring System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                Landslide Monitor
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#risk">Risk Status</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Landslide Risk Monitoring System
+            </h1>
+
+            <p>
+                An early warning and monitoring platform for
+                landslide-prone areas of North Eastern India.
+            </p>
+
+            <a href="#dashboard" class="btn">
+                View Dashboard
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="dashboard">
+
+        <h2>Monitoring Dashboard</h2>
+
+        <p class="section-text">
+            Current conditions collected from different monitoring
+            locations are shown below.
+        </p>
+
+
+        <div class="cards">
+
+            <!-- Rainfall -->
+            <div class="card">
+
+                <h3>Rainfall</h3>
+
+                <p class="value">
+                    86 mm
+                </p>
+
+                <p>
+                    Last 24 hours
+                </p>
+
+            </div>
+
+
+            <!-- Soil Moisture -->
+            <div class="card">
+
+                <h3>Soil Moisture</h3>
+
+                <p class="value">
+                    72%
+                </p>
+
+                <p>
+                    Current reading
+                </p>
+
+            </div>
+
+
+            <!-- Ground Movement -->
+            <div class="card">
+
+                <h3>Ground Movement</h3>
+
+                <p class="value">
+                    4.2 mm
+                </p>
+
+                <p>
+                    Change detected
+                </p>
+
+            </div>
+
+
+            <!-- Risk -->
+            <div class="card risk-card">
+
+                <h3>Current Risk</h3>
+
+                <p class="value">
+                    MODERATE
+                </p>
+
+                <p>
+                    Monitoring required
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Risk Status -->
+    <section id="risk" class="risk-section">
+
+        <h2>Risk Status</h2>
+
+        <div class="risk-box">
+
+            <h3>Moderate Risk</h3>
+
+            <p>
+                Rainfall and soil moisture levels are being monitored.
+                The area requires continuous observation.
+            </p>
+
+            <div class="progress">
+
+                <div class="progress-bar"></div>
+
+            </div>
+
+            <p>
+                Risk Level: 62%
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Location Section -->
+    <section class="location">
+
+        <h2>Monitoring Locations</h2>
+
+        <div class="location-list">
+
+            <div class="location-card">
+                <h3>Location 01</h3>
+                <p>Assam</p>
+                <span>Moderate Risk</span>
+            </div>
+
+            <div class="location-card">
+                <h3>Location 02</h3>
+                <p>Mizoram</p>
+                <span>Low Risk</span>
+            </div>
+
+            <div class="location-card">
+                <h3>Location 03</h3>
+                <p>Arunanchal Pradesh</p>
+                <span>High Risk</span>
+            </div>
+
+        </div>
+        <!-- Team Section -->
+<section class="team">
+
+    <h2>Our Team</h2>
+
+    <p class="section-text">
+        Meet the team working on the Landslide Risk Monitoring System.
+    </p>
+
+    <div class="team-list">
+
+        <div class="team-card">
+            <div class="leader-badge"> TEAM LEADER </div>
+            <img src="assets/ritwik.jpeg" alt="Ritwik Raj">
+            <h3>Ritwik Raj</h3>
+            <p>Frontend Development & UI Integration</p>
+        </div>
+
+        <div class="team-card">
+            <img src="assets/rubul.jpeg" alt="Rubul Hussain">
+            <h3>Rubul Hussain</h3>
+            <p>Frontend Development & User Experience</p>
+        </div>
+
+        <div class="team-card">
+            <img src="assets/sanskriti.jpeg" alt="Sanskriti Chauhan">
+            <h3>Sanskriti Chauhan</h3>
+            <p>Frontend Development & UI Design</p>
+        </div>
+
+        <div class="team-card">
+            <img src="assets/abhishek.jpeg" alt="Abhishek Pandey">
+            <h3>Abhishek Pandey</h3>
+            <p>Backend Development & API Architecture</p>
+        </div>
+
+        <div class="team-card">
+            <img src="assets/harshit.jpeg" alt="Harshit Sanguri">
+            <h3>Harshit Sanguri</h3>
+            <p>Backend Development & Database Management</p>
+        </div>
+
+        <div class="team-card">
+            <img src="assets/shalu.jpeg" alt="Shalu Negi">
+            <h3>Shalu Negi</h3>
+            <p>AI/ML Development & Data Processing</p>
+        </div>
+
+    </div>
+
+</section>
+    </section>
+
+
+    <!-- About -->
+    <section id="about" class="about">
+
+        <h2>About the Project</h2>
+
+        <p>
+            This project focuses on monitoring environmental and
+            ground-related conditions that may indicate a possible
+            landslide. The system can help authorities identify
+            risky areas and provide early warnings.
+        </p>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            Smart India Hackathon Project
+        </p>
+
+        <p>
+            Landslide Risk Monitoring System
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
