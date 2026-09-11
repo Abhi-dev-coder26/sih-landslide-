@@ -3,250 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Landslide Risk Monitoring System</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-    <!-- Navigation Bar -->
     <header>
-        <nav class="navbar">
-
-            <div class="logo">
-                Landslide Monitor
+        <nav class="navbar container">
+            <div class="logo-wrap">
+                <div class="logo-mark">LM</div>
+                <div class="logo-text">Landslide Monitor</div>
             </div>
-
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#risk">Risk Status</a></li>
+                <li><a href="#map-section">Map</a></li>
+                <li><a href="#risk">Risk</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
-
         </nav>
     </header>
 
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-inner">
+                <div class="hero-content">
+                    <p class="eyebrow">Early Warning Intelligence</p>
+                    <h1>North East Landslide Risk Monitoring System</h1>
+                    <p class="hero-copy">
+                        Real-time hazard tracking for rainfall-prone and erosion-sensitive terrain across
+                        Assam, Meghalaya, Mizoram, and Himalayan corridors.
+                    </p>
+                    <div class="cta-row">
+                        <a href="#dashboard" class="btn primary-btn">View Dashboard</a>
+                        <button id="quickAlertBtn" class="btn secondary-btn" type="button">Trigger Alert</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div>
+                            <strong id="activeSites">4</strong>
+                            <span>Active zones</span>
+                        </div>
+                        <div>
+                            <strong id="alertCount">2</strong>
+                            <span>Critical alerts</span>
+                        </div>
+                        <div>
+                            <strong>24/7</strong>
+                            <span>Monitoring</span>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Home Section -->
-    <section id="home" class="hero">
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="pulse-ring ring-one"></div>
+                    <div class="pulse-ring ring-two"></div>
+                    <div class="signal-card">
+                        <span class="dot"></span>
+                        <div>
+                            <small>Live status</small>
+                            <strong id="heroStatus">Moderate Risk</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="hero-content">
+        <section id="dashboard" class="dashboard section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow dark">Monitoring Dashboard</p>
+                    <h2>Live environmental conditions</h2>
+                </div>
 
-            <h1>
-                Landslide Risk Monitoring System
-            </h1>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-top">
+                            <h3>Rainfall</h3>
+                            <span class="pill bg-green">24h</span>
+                        </div>
+                        <p class="value" id="rainfallValue">86 mm</p>
+                        <p class="meta">Last 24 hours</p>
+                    </div>
 
-            <p>
-                An early warning and monitoring platform for
-                landslide-prone areas of North Eastern India.
-            </p>
+                    <div class="card">
+                        <div class="card-top">
+                            <h3>Soil Moisture</h3>
+                            <span class="pill bg-blue">Now</span>
+                        </div>
+                        <p class="value" id="soilValue">72%</p>
+                        <p class="meta">Current reading</p>
+                    </div>
 
-            <a href="#dashboard" class="btn">
-                View Dashboard
-            </a>
+                    <div class="card">
+                        <div class="card-top">
+                            <h3>Ground Movement</h3>
+                            <span class="pill bg-orange">Change</span>
+                        </div>
+                        <p class="value" id="movementValue">4.2 mm</p>
+                        <p class="meta">Detected shift</p>
+                    </div>
 
-        </div>
+                    <div class="card risk-card">
+                        <div class="card-top">
+                            <h3>Current Risk</h3>
+                            <span class="pill bg-gold">Live</span>
+                        </div>
+                        <p class="value" id="riskValue">MODERATE</p>
+                        <p class="meta">Monitoring required</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    </section>
+        <section id="map-section" class="map-section section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow dark">Hazard Map</p>
+                    <h2>Regional risk overview</h2>
+                </div>
 
+                <div class="map-layout">
+                    <div id="map" aria-label="Map showing landslide risk zones"></div>
 
-    <!-- Dashboard -->
-    <section id="dashboard" class="dashboard">
+                    <aside class="settings-panel">
+                        <h3>Settings</h3>
 
-        <h2>Monitoring Dashboard</h2>
+                        <label>
+                            <span>Map Style</span>
+                            <select id="mapStyle">
+                                <option value="osm">Standard</option>
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </label>
 
-        <p class="section-text">
-            Current conditions collected from different monitoring
-            locations are shown below.
-        </p>
+                        <label>
+                            <span>Risk Threshold</span>
+                            <select id="riskThreshold">
+                                <option value="40">Low (40%)</option>
+                                <option value="55">Moderate (55%)</option>
+                                <option value="70" selected>High (70%)</option>
+                            </select>
+                        </label>
 
+                        <label>
+                            <span>Refresh Interval</span>
+                            <select id="refreshInterval">
+                                <option value="5000">5 sec</option>
+                                <option value="10000" selected>10 sec</option>
+                                <option value="15000">15 sec</option>
+                            </select>
+                        </label>
 
-        <div class="cards">
+                        <label class="switch-row">
+                            <input type="checkbox" id="enableAlerts" checked>
+                            <span>Enable alert notifications</span>
+                        </label>
 
-            <!-- Rainfall -->
-            <div class="card">
+                        <button id="refreshBtn" class="btn primary-btn full-width" type="button">Refresh Data</button>
+                    </aside>
+                </div>
+            </div>
+        </section>
 
-                <h3>Rainfall</h3>
+        <section id="risk" class="risk-section section">
+            <div class="container risk-layout">
+                <div class="risk-box">
+                    <p class="eyebrow dark">Current Level</p>
+                    <h3 id="riskHeading">Moderate Risk</h3>
+                    <div class="progress">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                    <p id="riskText">Current risk level is 62%. Continuous monitoring is required.</p>
+                </div>
 
-                <p class="value">
-                    86 mm
-                </p>
+                <div class="alert-panel">
+                    <h3>Alert Summary</h3>
+                    <ul id="alertList">
+                        <li>Heavy rainfall in the East Hills sector</li>
+                        <li>Moisture accumulation rising near the Sikkim corridor</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
+        <section class="location section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow dark">Monitoring Zones</p>
+                    <h2>Regional coverage</h2>
+                </div>
+                <div id="locationList" class="location-list"></div>
+            </div>
+        </section>
+
+        <section class="team section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow dark">Our Team</p>
+                    <h2>Smart engineering collaboration</h2>
+                </div>
+
+                <div class="team-list">
+                    <div class="team-card">
+                        <div class="leader-badge">TEAM LEADER</div>
+                        <img src="ritwik.jpeg" alt="Ritwik Raj">
+                        <h3>Ritwik Raj</h3>
+                        <p>Frontend Development & UI Integration</p>
+                    </div>
+
+                    <div class="team-card">
+                        <img src="rubul.jpeg" alt="Rubul Hussain">
+                        <h3>Rubul Hussain</h3>
+                        <p>Frontend Development & User Experience</p>
+                    </div>
+
+                    <div class="team-card">
+                        <img src="sanskriti.jpeg" alt="Sanskriti Chauhan">
+                        <h3>Sanskriti Chauhan</h3>
+                        <p>Frontend Development & UI Design</p>
+                    </div>
+
+                    <div class="team-card">
+                        <img src="abhishek.jpeg" alt="Abhishek Pandey">
+                        <h3>Abhishek Pandey</h3>
+                        <p>Backend Development & API Architecture</p>
+                    </div>
+
+                    <div class="team-card">
+                        <img src="harshit.jpeg" alt="Harshit Sanguri">
+                        <h3>Harshit Sanguri</h3>
+                        <p>Backend Development & Database Management</p>
+                    </div>
+
+                    <div class="team-card">
+                        <img src="shalu.jpeg" alt="Shalu Negi">
+                        <h3>Shalu Negi</h3>
+                        <p>AI/ML Development & Data Processing</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about section">
+            <div class="container about-box">
+                <p class="eyebrow dark">About the Project</p>
+                <h2>Building safer communities through predictive monitoring</h2>
                 <p>
-                    Last 24 hours
+                    This system combines rainfall data, soil conditions, and movement measurements to give
+                    a clearer picture of landslide risk in vulnerable regions. It helps local authorities,
+                    emergency services, and research teams detect early warning signals before conditions turn critical.
                 </p>
-
             </div>
+        </section>
+    </main>
 
+    <footer>
+        <p>Smart India Hackathon Project</p>
+        <p>Landslide Risk Monitoring System</p>
+    </footer>
 
-            <!-- Soil Moisture -->
-            <div class="card">
-
-                <h3>Soil Moisture</h3>
-
-                <p class="value">
-                    72%
-                </p>
-
-                <p>
-                    Current reading
-                </p>
-
-            </div>
-
-
-            <!-- Ground Movement -->
-            <div class="card">
-
-                <h3>Ground Movement</h3>
-
-                <p class="value">
-                    4.2 mm
-                </p>
-
-                <p>
-                    Change detected
-                </p>
-
-            </div>
-
-
-            <!-- Risk -->
-            <div class="card risk-card">
-
-                <h3>Current Risk</h3>
-
-                <p class="value">
-                    MODERATE
-                </p>
-
-                <p>
-                    Monitoring required
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Risk Status -->
-    <section id="risk" class="risk-section">
-
-        <h2>Risk Status</h2>
-
-        <div class="risk-box">
-
-            <h3>Moderate Risk</h3>
-
-            <p>
-                Rainfall and soil moisture levels are being monitored.
-                The area requires continuous observation.
-            </p>
-
-            <div class="progress">
-
-                <div class="progress-bar"></div>
-
-            </div>
-
-            <p>
-                Risk Level: 62%
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- Location Section -->
-    <section class="location">
-
-        <h2>Monitoring Locations</h2>
-
-        <div class="location-list">
-
-            <div class="location-card">
-                <h3>Location 01</h3>
-                <p>Assam</p>
-                <span>Moderate Risk</span>
-            </div>
-
-            <div class="location-card">
-                <h3>Location 02</h3>
-                <p>Mizoram</p>
-                <span>Low Risk</span>
-            </div>
-
-            <div class="location-card">
-                <h3>Location 03</h3>
-                <p>Arunanchal Pradesh</p>
-                <span>High Risk</span>
-            </div>
-
-        </div>
-        <!-- Team Section -->
-<section class="team">
-
-    <h2>Our Team</h2>
-
-    <p class="section-text">
-        Meet the team working on the Landslide Risk Monitoring System.
-    </p>
-
-    <div class="team-list">
-
-        <div class="team-card">
-            <div class="leader-badge"> TEAM LEADER </div>
-            <img src="assets/ritwik.jpeg" alt="Ritwik Raj">
-            <h3>Ritwik Raj</h3>
-            <p>Frontend Development & UI Integration</p>
-        </div>
-
-        <div class="team-card">
-            <img src="assets/rubul.jpeg" alt="Rubul Hussain">
-            <h3>Rubul Hussain</h3>
-            <p>Frontend Development & User Experience</p>
-        </div>
-
-        <div class="team-card">
-            <img src="assets/sanskriti.jpeg" alt="Sanskriti Chauhan">
-            <h3>Sanskriti Chauhan</h3>
-            <p>Frontend Development & UI Design</p>
-        </div>
-
-        <div class="team-card">
-            <img src="assets/abhishek.jpeg" alt="Abhishek Pandey">
-            <h3>Abhishek Pandey</h3>
-            <p>Backend Development & API Architecture</p>
-        </div>
-
-        <div class="team-card">
-            <img src="assets/harshit.jpeg" alt="Harshit Sanguri">
-            <h3>Harshit Sanguri</h3>
-            <p>Backend Development & Database Management</p>
-        </div>
-
-        <div class="team-card">
-            <img src="assets/shalu.jpeg" alt="Shalu Negi">
-            <h3>Shalu Negi</h3>
-            <p>AI/ML Development & Data Processing</p>
-        </div>
-
-    </div>
-
-</section>
-    </section>
-
-
-    <!-- About -->
-    <section id="about" class="about">
-
-        <h2>About the Project</h2>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
 
         <p>
             This project focuses on monitoring environmental and
